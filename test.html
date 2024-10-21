@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eyeglasses Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-header img {
+            max-width: 300px;
+            border-radius: 8px;
+        }
+        .product-details {
+            max-width: 800px;
+            margin-left: 20px;
+        }
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .price {
+            color: #f04e30;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-btn {
+            background-color: #f04e30;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .product-description {
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        .tabs {
+            margin-top: 30px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+        }
+        .tabs a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            margin-right: 5px;
+        }
+        .tabs a.active {
+            color: #000;
+            border-bottom-color: #f04e30;
+        }
+        .reviews, .related-products {
+            margin-top: 30px;
+        }
+        .review-item, .related-product-item {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .review-rating {
+            color: #f04e30;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="product-header">
+            <img src="eyeglasses.jpg" alt="Eyeglasses">
+            <div class="product-details">
+                <h1 class="product-title">Dardhan Eyeglasses</h1>
+                <p class="price">$34.99</p>
+                <button class="add-to-cart-btn">Add to Cart</button>
+                <button class="add-to-cart-btn" style="background-color: #555; margin-left: 10px;">Try On</button>
+                <p class="product-description">Discover the style and elegance of Dardhan eyeglasses, featuring a modern rectangular design and high-quality materials.</p>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <a href="#description" class="active">Description</a>
+            <a href="#shipping">Shipping & Returns</a>
+            <a href="#lens">Lens Recommend</a>
+            <a href="#reviews">Reviews</a>
+        </div>
+
+        <div class="reviews">
+            <h2>Customer Reviews (562)</h2>
+            <div class="review-item">
+                <p><strong>4.9/5</strong> - Excellent quality and stylish fit!</p>
+                <p class="review-rating">★★★★★</p>
+            </div>
+            <!-- More review items -->
+        </div>
+
+        <div class="related-products">
+            <h2>You May Also Like</h2>
+            <div class="related-product-item">
+                <p>Chara Eyeglasses - $24.99</p>
+            </div>
+            <!-- More related product items -->
+        </div>
+    </div>
+</body>
+</html>
