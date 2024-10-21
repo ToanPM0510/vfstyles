@@ -145,7 +145,7 @@ function AppCanvas(props) {
             <img 
               src={photo} 
               alt={`Ảnh ${index}`} 
-              style={{ width: 336 }}
+              style={{ width: 300 }}
             />
         <div className="picture__img__options" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
         <button className="picture__img__delete" style={{ position: 'absolute', top: 0, right: 0 }} onClick={() => handleDeletePhoto(index)}>✕</button>
