@@ -47,6 +47,7 @@ function AppCanvas(props) {
   const [photos, setPhotos] = useState([]);
   const [clickCount, setClickCount] = useState(0);
   const maxClicks = 2;
+  
 
   const toggle_loading = (isLoadingVisible) => {
     refLoading.current.style.display = isLoadingVisible ? 'block' : 'none';
@@ -150,9 +151,6 @@ function AppCanvas(props) {
         <div className="picture__img__options" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
         <button className="picture__img__delete" style={{ position: 'absolute', top: 0, right: 0 }} onClick={() => handleDeletePhoto(index)}>✕</button>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '25px' }}>
-            <div className="picture__img__options__retry" style={{ marginRight: 10 }} onClick={handleRetryPhoto}>
-              <img className="picture__img__options__retry__img" src="https://cdn.icon-icons.com/icons2/2483/PNG/512/retry_icon_149879.png" alt="Retry" />
-            </div>
             <div className="picture__img__options__share" style={{ marginRight: 10 }}>
               <img className="picture__img__options__share__img" src="https://www.svgrepo.com/show/78468/share.svg" alt="Share" />
             </div>
