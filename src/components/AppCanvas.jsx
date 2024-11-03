@@ -1,43 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { JEELIZVTO, JEELIZVTOWIDGET } from 'jeelizvtowidget';
+import { JEELIZVTOWIDGET } from 'jeelizvtowidget';
 import searchImage from '../assets/462638079_541639745119771_352923006521251447_n.png';
 
-function init_VTOWidget(placeHolder, canvas, toggle_loading) {
-  JEELIZVTOWIDGET.start({
-    placeHolder,
-    canvas,
-    callbacks: {
-      ADJUST_START: null,
-      ADJUST_END: null,
-      LOADING_START: toggle_loading.bind(null, true),
-      LOADING_END: toggle_loading.bind(null, false),
-    },
-    sku: 'rayban_clubmaster_noir_bleuGris',
-    searchImageMask: searchImage,
-    searchImageColor: 0xeeeeee,
-    searchImageRotationSpeed: -0.001,
-    callbackReady: function () {
-      console.log('INFO: JEELIZVTOWIDGET is ready :)');
-    },
-    onError: function (errorLabel) {
-      alert('An error happened. errorLabel =' + errorLabel);
-      switch (errorLabel) {
-        case 'WEBCAM_UNAVAILABLE':
-          break;
-        case 'INVALID_SKU':
-          break;
-        case 'PLACEHOLDER_NULL_WIDTH':
-        case 'PLACEHOLDER_NULL_HEIGHT':
-          break;
-        case 'FATAL':
-        default:
-          break;
-      }
-    },
-  });
-}
-
-function AppCanvas(props) {
+function AppCanvas() {
   const refPlaceHolder = useRef();
   const refCanvas = useRef();
   const refAdjustEnter = useRef();
@@ -46,126 +11,198 @@ function AppCanvas(props) {
   const refLoading = useRef();
   const [photos, setPhotos] = useState([]);
   const [clickCount, setClickCount] = useState(0);
+  const [currentModel, setCurrentModel] = useState('rayban_clubmaster_noir_bleuGris');
   const maxClicks = 2;
-  
+  const [isAdjustMode, setIsAdjustMode] = useState(false);
 
-  const toggle_loading = (isLoadingVisible) => {
-    refLoading.current.style.display = isLoadingVisible ? 'block' : 'none';
+  // Danh sách models kính
+  const glassesModels = [
+    {
+      id: 'model1',
+      sku: 'rayban_cockpit_or_vert_classique',
+      name: 'Rayban Cockpit',
+      price: '₫2,590,000'
+    },
+    {
+      id: 'model2',
+      sku: 'rayban_round_cuivre_pinkBrownDegrade',
+      name: 'Rayban Round',
+      price: '₫2,890,000'
+    },
+    {
+      id: 'model3',
+      sku: 'rayban_new_wayfarer_havane_marron_clair_degrade',
+      name: 'Rayban Wayfarer',
+      price: '₫3,190,000'
+    }
+  ];
+
+  const init_VTOWidget = (placeHolder, canvas) => {
+    JEELIZVTOWIDGET.start({
+      placeHolder,
+      canvas,
+      callbacks: {
+        ADJUST_START: () => setIsAdjustMode(true),
+        ADJUST_END: () => setIsAdjustMode(false),
+        LOADING_START: () => refLoading.current.style.display = 'block',
+        LOADING_END: () => refLoading.current.style.display = 'none',
+      },
+      sku: currentModel,
+      searchImageMask: searchImage,
+      searchImageColor: 0xeeeeee,
+      searchImageRotationSpeed: -0.001,
+      callbackReady: () => {
+        console.log('JEELIZVTOWIDGET is ready');
+      },
+      onError: (errorLabel) => {
+        console.error('Error:', errorLabel);
+        alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+      }
+    });
   };
 
   const enter_adjustMode = () => {
     JEELIZVTOWIDGET.enter_adjustMode();
-    refAdjustEnter.current.style.display = 'none';
-    refAdjust.current.style.display = 'block';
-    refChangeModel.current.style.display = 'none';
+    setIsAdjustMode(true);
   };
 
   const exit_adjustMode = () => {
     JEELIZVTOWIDGET.exit_adjustMode();
-    refAdjustEnter.current.style.display = 'block';
-    refAdjust.current.style.display = 'none';
-    refChangeModel.current.style.display = 'block';
+    setIsAdjustMode(false);
   };
 
   const set_glassesModel = (sku) => {
     JEELIZVTOWIDGET.load(sku);
+    setCurrentModel(sku);
   };
 
   const capturePhoto = () => {
-    if (clickCount < maxClicks) {
-      const canvas = refCanvas.current;
-      const dataUrl = canvas.toDataURL('image/png'); 
-      setPhotos((prevPhotos) => [...prevPhotos, dataUrl]); 
-      setClickCount(prevCount => prevCount + 1);
-    } else {
-      alert('Các mẫu kính bạn thử trông rất hợp với bạn! Hãy dừng chụp ảnh thêm nữa và suy nghĩ kỹ để chọn ra mẫu hoàn hảo nhất nhé!');
+    if (clickCount >= maxClicks) {
+      alert('Bạn đã chụp đủ số ảnh cho phép (2 ảnh). Hãy xóa bớt ảnh để chụp thêm!');
+      return;
     }
-  };
-  const handleRetryPhoto = () => {
-    setClickCount(prevCount => {
-      const newCount = Math.max(prevCount - 1, 0); 
-      capturePhoto(newCount); 
-      return newCount;
-    });
-  };
-  const handleDeletePhoto = (index) => {
-    
-    setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index));
-    
-    setClickCount(prevCount => Math.max(prevCount - 1, 0));
-  };
-  useEffect(() => {
-    const placeHolder = refPlaceHolder.current;
-    const canvas = refCanvas.current;
-    init_VTOWidget(placeHolder, canvas, toggle_loading);
 
+    const canvas = refCanvas.current;
+    const dataUrl = canvas.toDataURL('image/png');
+    setPhotos(prev => [...prev, { url: dataUrl, model: currentModel }]);
+    setClickCount(prev => prev + 1);
+  };
+
+  const handleDeletePhoto = (index) => {
+    setPhotos(prev => prev.filter((_, i) => i !== index));
+    setClickCount(prev => prev - 1);
+  };
+
+  const handleShare = async (photoUrl, platform) => {
+    // Hiện thông báo tạm thời
+    alert('Tính năng đang được phát triển. Xin vui lòng thử lại sau!');
+  };
+
+  useEffect(() => {
+    init_VTOWidget(refPlaceHolder.current, refCanvas.current);
     return () => {
-      //JEELIZVTOWIDGET.destroy();
+      JEELIZVTOWIDGET.destroy();
     };
   }, []);
 
   return (
-    <div>
-      <div ref={refPlaceHolder} className='JeelizVTOWidget'>
-        <canvas ref={refCanvas} className='JeelizVTOWidgetCanvas'>
-        </canvas>
+    <div className="vto-container">
+      <div className="main-content">
+        <div ref={refPlaceHolder} className="JeelizVTOWidget">
+          <canvas ref={refCanvas} className="JeelizVTOWidgetCanvas" />
+          
+          <div className="controls-container">
+            {!isAdjustMode && (
+              <div className="main-controls">
+                <button className="control-button adjust" onClick={enter_adjustMode}>
+                  <i className="fas fa-arrows-alt"></i> Điều chỉnh
+                </button>
+                <button className="control-button capture" onClick={capturePhoto}>
+                  <i className="fas fa-camera"></i> Chụp ảnh
+                </button>
+              </div>
+            )}
 
-        <div ref={refAdjustEnter} className='JeelizVTOWidgetControls'>
-          <button className='JeelizVTOWidgetButton JeelizVTOWidgetAdjustEnterButton' onClick={enter_adjustMode}>
-            Adjust
-          </button>
-          <button className='JeelizVTOWidgetButton' onClick={capturePhoto}>
-            Take a photo
-          </button>
-        </div>
+            {isAdjustMode && (
+              <div className="adjust-notice">
+                <p>Di chuyển kính để điều chỉnh vị trí</p>
+                <button className="control-button" onClick={exit_adjustMode}>
+                  <i className="fas fa-check"></i> Xong
+                </button>
+              </div>
+            )}
 
+            <div className="models-container">
+              {glassesModels.map((model) => (
+                <button
+                  key={model.id}
+                  className={`model-button ${currentModel === model.sku ? 'active' : ''}`}
+                  onClick={() => set_glassesModel(model.sku)}
+                >
+                  {model.name}
+                  <span className="price">{model.price}</span>
+                </button>
+              ))}
+            </div>
+          </div>
 
-        <div ref={refAdjust} className='JeelizVTOWidgetAdjustNotice'>
-          Move the glasses to adjust them.
-          <button className='JeelizVTOWidgetButton JeelizVTOWidgetAdjustExitButton' onClick={exit_adjustMode}>
-            Quit
-          </button>
-        </div>
-
-        <div ref={refChangeModel} className='JeelizVTOWidgetControls JeelizVTOWidgetChangeModelContainer'>
-          <button className='JeelizVTOWidgetButton' onClick={set_glassesModel.bind(this, 'rayban_cockpit_or_vert_classique')}>Model 1</button>
-          <button className='JeelizVTOWidgetButton' onClick={set_glassesModel.bind(this, 'rayban_round_cuivre_pinkBrownDegrade')}>Model 2</button>
-          <button className='JeelizVTOWidgetButton' onClick={set_glassesModel.bind(this, 'rayban_new_wayfarer_havane_marron_clair_degrade')}>Model 3</button>
-        </div>
-
-
-
-        <div ref={refLoading} className='JeelizVTOWidgetLoading'>
-          <div className='JeelizVTOWidgetLoadingText'>LOADING...</div>
+          <div ref={refLoading} className="loading-overlay">
+            <div className="loading-spinner"></div>
+            <div className="loading-text">Đang tải...</div>
+          </div>
         </div>
       </div>
 
-      <div style={{ position: 'fixed', top: 10, right: 10, display: 'flex', flexDirection: 'column' }}>
+      <div className="photos-gallery">
         {photos.map((photo, index) => (
-          <div key={index} className="picture" style={{ position: 'relative', marginBottom: 5 }}>
-            <img 
-              src={photo} 
-              alt={`Ảnh ${index}`} 
-              style={{ width: 300 }}
-            />
-        <div className="picture__img__options" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
-        <button className="picture__img__delete" style={{ position: 'absolute', top: 0, right: 0 }} onClick={() => handleDeletePhoto(index)}>✕</button>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '25px' }}>
-            <div className="picture__img__options__share" style={{ marginRight: 10 }}>
-              <img className="picture__img__options__share__img" src="https://www.svgrepo.com/show/78468/share.svg" alt="Share" />
-            </div>
-            <div className="picture__img__options__details">
-            <a href="https://vn.shp.ee/kiDhq51" target="_blank" rel="noopener noreferrer">
-              <img className="picture__img__options__details__img" src="https://jeeliz.com/sunglasses/images/dollar-notwhite.svg" alt="Details" />
-            </a>
-            </div>
-          </div>
-        </div>
-          </div>
+<div className="photo-item">
+  <img src={photo.url} alt={`Ảnh thử kính ${index + 1}`} />
+  <div className="photo-controls">
+    <div className="share-group">
+      <button 
+        className="share-button facebook"
+        onClick={() => handleShare(photo.url, 'facebook')}
+        title="Chia sẻ lên Facebook"
+      >
+        <i className="fab fa-facebook"></i>
+      </button>
+      <button 
+        className="share-button messenger"
+        onClick={() => handleShare(photo.url, 'messenger')}
+        title="Chia sẻ qua Messenger"
+      >
+        <i className="fab fa-facebook-messenger"></i>
+      </button>
+      <button 
+        className="share-button twitter"
+        onClick={() => handleShare(photo.url, 'twitter')}
+        title="Chia sẻ lên Twitter"
+      >
+        <i className="fab fa-twitter"></i>
+      </button>
+    </div>
+    <div className="action-group">
+      <a 
+        href="https://vn.shp.ee/kiDhq51" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="buy-button"
+        title="Mua ngay"
+      >
+        <i className="fas fa-shopping-cart"></i>
+      </a>
+      <button 
+        onClick={() => handleDeletePhoto(index)} 
+        className="delete-button"
+        title="Xóa ảnh"
+      >
+        <i className="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>
         ))}
       </div>
-
-
     </div>
   );
 }
