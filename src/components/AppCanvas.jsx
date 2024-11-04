@@ -21,19 +21,19 @@ function AppCanvas() {
       id: 'model1',
       sku: 'rayban_cockpit_or_vert_classique',
       name: 'Rayban Cockpit',
-      price: '₫2,590,000'
+      price: '₫150.000'
     },
     {
       id: 'model2',
       sku: 'rayban_round_cuivre_pinkBrownDegrade',
       name: 'Rayban Round',
-      price: '₫2,890,000'
+      price: '₫300.000'
     },
     {
       id: 'model3',
       sku: 'rayban_new_wayfarer_havane_marron_clair_degrade',
       name: 'Rayban Wayfarer',
-      price: '₫3,190,000'
+      price: '₫210.000'
     }
   ];
 
