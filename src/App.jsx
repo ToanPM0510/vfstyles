@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import AppCanvas from './components/AppCanvas';
 import Toast from './Toast';
-
+import { Analytics } from '@vercel/analytics/react';
 function App() {
   const [toast, setToast] = useState(null);
 
@@ -21,6 +21,7 @@ function App() {
         />
       )}
       <AppCanvas onShowToast={showToast} />
+      <Analytics />
     </ErrorBoundary>
   );
 }
