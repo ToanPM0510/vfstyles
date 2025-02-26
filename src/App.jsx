@@ -1,6 +1,5 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react'; // Thêm useEffect
-import { useLocation } from 'react-router-dom'; // Thêm dòng này
 import ErrorBoundary from './ErrorBoundary';
 import AppCanvas from './components/AppCanvas';
 import Toast from './Toast';
@@ -13,15 +12,11 @@ ReactGA.initialize('G-YB2BBZK2FN');
 
 function App() {
   const [toast, setToast] = useState(null);
-  const location = useLocation(); // Thêm hook này
 
   // Theo dõi pageviews
   useEffect(() => {
-    ReactGA.send({ 
-      hitType: "pageview", 
-      page: location.pathname + location.search 
-    });
-  }, [location]);
+    ReactGA.send({ hitType: "pageview", page: "/" });
+  }, []); // Chỉ chạy một lần khi component mount
 
   const showToast = (message, type) => {
     setToast({ message, type });
