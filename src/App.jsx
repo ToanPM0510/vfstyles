@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Thêm useEffect
 import ErrorBoundary from './ErrorBoundary';
 import AppCanvas from './components/AppCanvas';
 import Toast from './Toast';
@@ -18,12 +18,29 @@ import Register from '../pages/Register';
 import Verify from '../pages/Verify';
 import ForgotPassword from '../pages/ForgotPassword';
 import AuthLayout from '../layouts/AuthLayout';
+import ReactGA from 'react-ga4';
+// Khởi tạo GA4
+ReactGA.initialize('G-YB2BBZK2FN');
 
 function App() {
   const [toast, setToast] = useState(null);
 
+  // Theo dõi pageviews
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: "/" });
+  }, []); // Chỉ chạy một lần khi component mount
+
   const showToast = (message, type) => {
     setToast({ message, type });
+  };
+
+  // Ví dụ về theo dõi sự kiện
+  const trackEvent = (eventName, eventParams) => {
+    ReactGA.event({
+      category: 'User Interaction',
+      action: eventName,
+      ...eventParams
+    });
   };
 
   return (
