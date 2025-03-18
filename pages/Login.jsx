@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { login } from "../services/api";
+import { login, loginGoogle } from "../services/api";
 
 const GOOGLE_CLIENT_ID =
   "405668006274-ivm51v61il5pu2iu7rkitss3psh625lk.apps.googleusercontent.com";
@@ -106,12 +106,7 @@ const Login = () => {
     const googleToken = response.credential;
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login/google",
-        {
-          token: googleToken,
-        }
-      );
+      const res = await loginGoogle({ token: googleToken });
       localStorage.setItem("token", res.data.token);
       const decodedToken = JSON.parse(atob(res.data.token.split(".")[1]));
       const userRole = decodedToken.Role;

@@ -7,7 +7,7 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
+  
 // Add token to requests
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
@@ -22,4 +22,4 @@ export const login = (data) => api.post('/auth/login', data);
 export const register = (data) => api.post('/auth/register', data);
 export const verify = (data) => api.post('/auth/verify', data);
 export const forgotPassword = (data) => api.post('/auth/forgot-password', data);
-
+export const loginGoogle = (data) => api.post('/auth/login/google', data);
