@@ -13,10 +13,10 @@ import {
   Outlet
 } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-import Verify from '../pages/Verify';
-import ForgotPassword from '../pages/ForgotPassword';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Verify from './pages/Verify';
+import ForgotPassword from './pages/ForgotPassword';
 import AuthLayout from '../layouts/AuthLayout';
 import ReactGA from 'react-ga4';
 // Khởi tạo GA4
