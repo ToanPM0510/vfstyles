@@ -99,7 +99,7 @@ const Register = () => {
       } else if (userRole === "Admin") {
         navigate("/dashboard");
       } else {
-        navigate("/NotFound");
+        navigate("/");
       }
     } catch (error) {
       let newErrors = {};

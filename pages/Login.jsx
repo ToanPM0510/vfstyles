@@ -63,7 +63,7 @@ const Login = () => {
       const userRole = decodedToken.Role;
 
       if (userRole === "Customer") {
-        navigate("/NotFound");
+        navigate("/");
       } else if (userRole === "Admin") {
         navigate("/");
       } else {
@@ -116,7 +116,7 @@ const Login = () => {
       } else if (userRole === "Admin") {
         navigate("/dashboard");
       } else {
-        navigate("/NotFound");
+        navigate("/");
       }
     } catch (error) {
       let newErrors = {};
