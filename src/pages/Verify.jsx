@@ -24,7 +24,7 @@ const Verify = () => {
   e.preventDefault();
 
   try {
-    const response = await verify(formData.verificationCode);
+    const response = await verify({ verifyCode: formData.verificationCode });
     setSuccessMessage(response.data.message);
     navigate('/login');
   } catch (error) {
