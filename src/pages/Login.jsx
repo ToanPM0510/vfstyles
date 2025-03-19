@@ -170,7 +170,7 @@ const Login = () => {
                   value={formData.username}
                   onChange={handleChange}
                   className="input-field"
-                  placeholder="Enter your username"
+                  placeholder="Nhập tên người dùng của bạn"
                 />
                 {errors.username && (
                   <p className="text-red-500 text-sm">{errors.username}</p>
@@ -192,7 +192,7 @@ const Login = () => {
                   value={formData.password}
                   onChange={handleChange}
                   className="input-field"
-                  placeholder="Enter your password"
+                  placeholder="Nhập mật khẩu"
                 />
                 {errors.password && (
                   <p className="text-red-500 text-sm">{errors.password}</p>

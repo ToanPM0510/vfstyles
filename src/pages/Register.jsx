@@ -154,7 +154,7 @@ const Register = () => {
                   value={formData.username}
                   onChange={handleChange}
                   className="input-field"
-                  placeholder="Enter your username"
+                  placeholder="Nhập tên người dùng của bạn"
                 />
                 {errors.username && (
                   <p className="text-red-500 text-sm">{errors.username}</p>
@@ -177,7 +177,7 @@ const Register = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className="input-field"
-                  placeholder="Enter your email"
+                  placeholder="Nhập email của bạn"
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email}</p>
@@ -201,7 +201,7 @@ const Register = () => {
                   onChange={handleChange}
                   minLength={8}
                   className="input-field"
-                  placeholder="Enter your password"
+                  placeholder="Nhập mật khẩu"
                 />
                 {errors.password && (
                   <p className="text-red-500 text-sm">{errors.password}</p>
@@ -225,7 +225,7 @@ const Register = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className="input-field"
-                  placeholder="Confirm your password"
+                  placeholder="Nhập xác nhận mật khẩu"
                 />
                 {errors.confirmPassword && (
                   <p className="text-red-500 text-sm">
