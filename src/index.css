@@ -160,67 +160,73 @@ html, body {
 /* Models container */
 .models-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(3, 1fr); /* 3 sản phẩm trên 1 hàng */
+  gap: 15px; /* Khoảng cách giữa các sản phẩm */
   padding: 15px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
-  max-height: 200px;
+  max-height: 250px; /* Giảm chiều cao tối đa */
   overflow-y: auto;
-  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .model-item {
   text-align: center;
-  padding: 10px;
-  border: 1px solid #eee;
+  padding: 10px; /* Giảm padding */
+  border: 1px solid #ddd;
   border-radius: 8px;
-  transition: transform 0.2s ease;
-  background: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
 }
 
 .model-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px); /* Hiệu ứng hover nhẹ hơn */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .model-button {
-  background: #f8f9fa;
+  background: #f9f9f9;
   color: #333;
   border: 2px solid transparent;
-  padding: 10px;
+  padding: 10px; /* Giảm padding */
   border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px; /* Giảm kích thước chữ */
+  font-weight: 500;
   transition: all 0.3s ease;
 }
 
 .model-button.active {
   border-color: #007bff;
   background: #007bff;
-  color: white;
+  color: #fff;
 }
 
 .model-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ hơn */
+  background: #e9ecef;
 }
 
 .model-name {
   font-weight: bold;
+  font-size: 14px; /* Giảm kích thước chữ */
   margin-bottom: 5px;
+  display: block;
 }
 
 .model-price {
-  font-size: 12px;
-  color: #666;
+  font-size: 13px; /* Giảm kích thước chữ */
+  color: #555;
+  display: block; /* Đưa xuống dòng riêng */
+  margin-bottom: 3px; /* Thêm khoảng cách dưới */
 }
 
 .model-details {
-  font-size: 12px;
-  color: #999;
-  margin-top: 5px;
+  font-size: 12px; /* Giảm kích thước chữ */
+  color: #777;
+  display: block; /* Đưa xuống dòng riêng */
+  margin-top: 3px; /* Thêm khoảng cách trên */
 }
-
 /* Loading overlay */
 .loading-overlay {
   position: absolute;
@@ -364,4 +370,161 @@ html, body {
   background: #007bff;
   color: white;
   transform: scale(1.1); /* Làm nổi bật kính đang chọn */
+}
+/* ChatWidget.css - Create this file for styling */
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: 'Roboto', sans-serif;
+}
+
+.chat-toggle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.chat-toggle:hover {
+  background-color: #303f9f;
+  transform: scale(1.05);
+}
+
+.chat-container {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 350px;
+  height: 500px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 15px;
+  background-color: #3f51b5;
+  color: white;
+  text-align: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 18px;
+  margin-bottom: 5px;
+  word-wrap: break-word;
+}
+
+.message.bot {
+  align-self: flex-start;
+  background-color: #f1f0f0;
+  color: #333;
+}
+
+.message.user {
+  align-self: flex-end;
+  background-color: #3f51b5;
+  color: white;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recommendation {
+  margin-top: 8px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recommendation-info {
+  font-size: 14px;
+}
+
+.recommendation-price {
+  font-weight: bold;
+  color: #f44336;
+  margin-top: 3px;
+}
+
+.try-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.try-button:hover {
+  background-color: #388e3c;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+}
+
+.chat-input button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-input button:hover {
+  background-color: #303f9f;
 }
