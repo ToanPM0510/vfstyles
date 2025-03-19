@@ -87,7 +87,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "vfstyle-fcb8d4e2b9b9g9hy.southeastasia-01.azurewebsites.net/api/auth/register/google",
+        "https://hotelbooking-g7dhczb5a2dbgzc3.southeastasia-01.azurewebsites.net/api/auth/register/google",
         { token: googleToken }
       );
 
