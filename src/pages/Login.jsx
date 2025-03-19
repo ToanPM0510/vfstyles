@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { login, loginGoogle } from "../services/api";
+import { decodeToken } from "../services/auth";
 
 const GOOGLE_CLIENT_ID =
   "405668006274-ivm51v61il5pu2iu7rkitss3psh625lk.apps.googleusercontent.com";
@@ -106,15 +107,16 @@ const Login = () => {
     const googleToken = response.credential;
 
     try {
-      const res = await loginGoogle({ token: googleToken });
+      const res = await loginGoogle({ googleToken });
       localStorage.setItem("token", res.data.token);
-      const decodedToken = JSON.parse(atob(res.data.token.split(".")[1]));
-      const userRole = decodedToken.Role;
-
+      const decodedUser = decodeToken();
+      const userRole = decodedUser ? decodedUser.role : null;
       if (userRole === "Customer") {
-        navigate("/profile");
+        navigate("/");
       } else if (userRole === "Admin") {
-        navigate("/dashboard");
+        navigate("/");
+      } else if (userRole === "Staff") {
+        navigate("/");
       } else {
         navigate("/");
       }

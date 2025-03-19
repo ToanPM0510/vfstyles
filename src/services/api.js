@@ -22,4 +22,4 @@ export const login = (data) => api.post('/auth/login', data);
 export const register = (data) => api.post('/auth/register', data);
 export const verify = (data) => api.post('/auth/verify', data);
 export const forgotPassword = (data) => api.post('/auth/forgot-password', data);
-export const loginGoogle = (data) => api.post('/auth/login/google', data);
+export const loginGoogle = (data) => api.post('/auth/login/google', { token: data.googleToken });
