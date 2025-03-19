@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState, useEffect } from 'react'; // Thêm useEffect
+import React, { useState, useEffect } from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import AppCanvas from './components/AppCanvas';
 import Toast from './Toast';
@@ -18,23 +18,22 @@ import Register from './pages/Register';
 import Verify from './pages/Verify';
 import ForgotPassword from './pages/ForgotPassword';
 import AuthLayout from '../layouts/AuthLayout';
+import ProtectedRoute from './components/ProtectedRoute';
 import ReactGA from 'react-ga4';
-// Khởi tạo GA4
+
 ReactGA.initialize('G-YB2BBZK2FN');
 
 function App() {
   const [toast, setToast] = useState(null);
 
-  // Theo dõi pageviews
   useEffect(() => {
     ReactGA.send({ hitType: "pageview", page: "/" });
-  }, []); // Chỉ chạy một lần khi component mount
+  }, []);
 
   const showToast = (message, type) => {
     setToast({ message, type });
   };
 
-  // Ví dụ về theo dõi sự kiện
   const trackEvent = (eventName, eventParams) => {
     ReactGA.event({
       category: 'User Interaction',
@@ -55,14 +54,21 @@ function App() {
         )}
         <Toaster position="top-right" />
         <Routes>
-          {/* Auth routes */}
+          {/* Public routes */}
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/verify" element={<Verify />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
           </Route>
-          <Route path="/" element={<AppCanvas onShowToast={showToast} />} />
+
+          {/* Protected routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<AppCanvas onShowToast={showToast} />} />
+          </Route>
+
+          {/* Redirect any unknown routes to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Analytics />
         <SpeedInsights />

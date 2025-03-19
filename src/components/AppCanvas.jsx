@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { JEELIZVTOWIDGET } from 'jeelizvtowidget';
 import searchImage from '../assets/462638079_541639745119771_352923006521251447_n.png';
+import AvatarMenu from './AvatarMenu';
 import ChatWidget from './ChatWidget'; // Import the new component
 // Constants for glass categories
 const GLASS_CATEGORIES = {
@@ -461,6 +462,8 @@ function AppCanvas() {
 
   // JSX Structure
   return (
+    <>
+    <AvatarMenu />
     <div className="vto-container">
       <div className={`main-content ${comparisonMode ? 'comparison-mode' : ''}`}>
         {/* Comparison Mode View */}
@@ -617,6 +620,7 @@ function AppCanvas() {
         ))}
       </div>
     </div>
+    </>
   );
 }
 
