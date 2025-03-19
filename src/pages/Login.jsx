@@ -140,10 +140,10 @@ const Login = () => {
       <div className="auth-background flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h1 className="text-center text-4xl font-extrabold text-white mb-2">
-            Welcome Back
+            Chào mừng bạn đã trở lại
           </h1>
           <p className="text-center text-gray-200 text-lg">
-            Sign in to continue your journey
+          Đăng nhập để tiếp tục hành trình của bạn
           </p>
         </div>
 
@@ -160,7 +160,7 @@ const Login = () => {
                   htmlFor="username"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Username
+                  Tên người dùng
                 </label>
                 <input
                   id="username"
@@ -182,7 +182,7 @@ const Login = () => {
                   htmlFor="password"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Password
+                  Mật khẩu
                 </label>
                 <input
                   id="password"
@@ -213,7 +213,7 @@ const Login = () => {
                     htmlFor="rememberMe"
                     className="ml-2 block text-sm text-gray-700"
                   >
-                    Remember me
+                    Nhớ mật khẩu
                   </label>
                 </div>
 
@@ -222,20 +222,20 @@ const Login = () => {
                     to="/forgot-password"
                     className="font-medium text-purple-600 hover:text-purple-500 transition duration-150 ease-in-out"
                   >
-                    Forgot password?
+                    Quên mật khẩu?
                   </Link>
                 </div>
               </div>
 
               <div>
                 <button type="submit" className="btn-primary">
-                  Sign in
+                  Đăng nhập
                 </button>
               </div>
             </form>
 
             <div className="auth-divider">
-              <span className="auth-divider-text">Or continue with</span>
+              <span className="auth-divider-text">Hoặc tiếp tục với</span>
             </div>
 
             <div className="flex justify-center">
@@ -246,12 +246,12 @@ const Login = () => {
             </div>
 
             <p className="mt-8 text-center text-sm text-gray-600">
-              Don't have an account?{" "}
+              Bạn chưa có tài khoản{" "}
               <Link
                 to="/register"
                 className="font-medium text-purple-600 hover:text-purple-500 transition duration-150 ease-in-out"
               >
-                Create an account
+                Đăng ký tài khoản
               </Link>
             </p>
           </div>

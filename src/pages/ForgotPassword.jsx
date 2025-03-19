@@ -33,10 +33,10 @@ const ForgotPassword = () => {
     <div className="auth-background flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h1 className="text-center text-4xl font-extrabold text-white mb-2">
-          Forgot Password?
+          Quên mật khẩu?
         </h1>
         <p className="text-center text-gray-200 text-lg">
-          Enter your email to reset your password
+        Nhập email của bạn để đặt lại mật khẩu
         </p>
       </div>
 
@@ -51,7 +51,7 @@ const ForgotPassword = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Email address
+               Địa chỉ email
               </label>
               <input
                 id="email"
@@ -67,7 +67,7 @@ const ForgotPassword = () => {
 
             <div>
               <button type="submit" className="btn-primary">
-                Reset Password
+                Khôi phục mật khẩu
               </button>
             </div>
           </form>

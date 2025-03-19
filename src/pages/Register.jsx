@@ -123,10 +123,10 @@ const Register = () => {
       <div className="auth-background flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h1 className="text-center text-4xl font-extrabold text-white mb-2">
-            Create Account
+            Đăng ký tài khoản
           </h1>
           <p className="text-center text-gray-200 text-lg">
-            Join us and start your journey
+          Hãy tham gia cùng chúng tôi và bắt đầu hành trình của bạn
           </p>
         </div>
 
@@ -143,7 +143,7 @@ const Register = () => {
                   htmlFor="username"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Username
+                  Tên đăng nhập
                 </label>
                 <input
                   id="username"
@@ -166,7 +166,7 @@ const Register = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Email address
+                  Địa chỉ email
                 </label>
                 <input
                   id="email"
@@ -189,7 +189,7 @@ const Register = () => {
                   htmlFor="password"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Password
+                  Mật khẩu
                 </label>
                 <input
                   id="password"
@@ -213,7 +213,7 @@ const Register = () => {
                   htmlFor="confirmPassword"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Confirm Password
+                  Xác nhận mật khẩu
                 </label>
                 <input
                   id="confirmPassword"
@@ -236,13 +236,13 @@ const Register = () => {
 
               <div>
                 <button type="submit" className="btn-primary">
-                  Create Account
+                  Tạo tài khoản
                 </button>
               </div>
             </form>
 
             <div className="auth-divider">
-              <span className="auth-divider-text">Or continue with</span>
+              <span className="auth-divider-text">Hoặc tiếp tục với</span>
             </div>
 
             <div className="flex justify-center">
@@ -254,12 +254,12 @@ const Register = () => {
             </div>
 
             <p className="mt-8 text-center text-sm text-gray-600">
-              Already have an account?{" "}
+              Bạn đã có tài khoản?{" "}
               <Link
                 to="/login"
                 className="font-medium text-purple-600 hover:text-purple-500 transition duration-150 ease-in-out"
               >
-                Sign in here
+                Đăng nhập tại đây
               </Link>
             </p>
           </div>
