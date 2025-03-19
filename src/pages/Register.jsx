@@ -13,6 +13,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    name: "",
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -158,6 +159,28 @@ const Register = () => {
                 />
                 {errors.username && (
                   <p className="text-red-500 text-sm">{errors.username}</p>
+                )}
+              </div>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Họ và tên
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  autoComplete="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="input-field"
+                  placeholder="Họ và tên của bạn"
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm">{errors.name}</p>
                 )}
               </div>
 
